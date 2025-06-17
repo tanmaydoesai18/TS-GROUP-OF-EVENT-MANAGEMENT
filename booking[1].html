@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Your Event</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="firebase.js"></script>
+</head>
+<body>
+  <h2>Book Your Event</h2>
+  <form id="bookingForm">
+    <input type="text" placeholder="Full Name" id="name" required />
+    <input type="email" placeholder="Email" id="email" required />
+    <input type="tel" placeholder="Phone Number" id="phone" required />
+    <select id="eventType">
+      <option value="wedding">Wedding</option>
+      <option value="party">Party</option>
+      <option value="corporate">Corporate</option>
+    </select>
+    <input type="date" id="eventDate" required />
+    <textarea placeholder="Additional Notes" id="notes"></textarea>
+    <button type="submit">Submit Booking</button>
+  </form>
+  <p id="msg"></p>
+</body>
+</html>

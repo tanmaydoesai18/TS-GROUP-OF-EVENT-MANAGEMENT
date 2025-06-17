@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TS Event Management</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f0f0f5; }
+    header { background: #222; color: #fff; padding: 2rem; text-align: center; }
+    header h1 { margin: 0; font-size: 2.5rem; }
+    header p { margin-top: 0.5rem; font-size: 1.2rem; }
+    .thumbnail { text-align: center; margin-top: 2rem; }
+    .thumbnail img { max-width: 100%; height: auto; border-radius: 10px; }
+    .section { padding: 2rem; background: #fff; margin: 2rem auto; width: 90%; max-width: 1000px; border-radius: 10px; }
+    .section h2 { color: #333; margin-bottom: 1rem; }
+    .programs ul { list-style: none; padding-left: 0; }
+    .programs li { background: #f8f8f8; padding: 1rem; margin-bottom: 0.5rem; border-left: 5px solid #007acc; border-radius: 5px; }
+    footer { background: #222; color: #ccc; text-align: center; padding: 1rem; }
+    form { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    input, textarea, select { padding: 0.8rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem; }
+    button { padding: 1rem; background: #007acc; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; }
+  </style>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBBfbUjftsZU-gvoC7UGXd-A_R9xncx6k4",
+      authDomain: "ts-event-management.firebaseapp.com",
+      projectId: "ts-event-management",
+      storageBucket: "ts-event-management.firebasestorage.app",
+      messagingSenderId: "557569710531",
+      appId: "1:557569710531:web:9aa375f5cb7af50a9fc576",
+      measurementId: "G-L7D4VY572P"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.submitForm = async () => {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const event = document.getElementById('event').value;
+      const message = document.getElementById('message').value;
+
+      try {
+        await addDoc(collection(db, "contacts"), {
+          name, email, phone, event, message,
+          timestamp: new Date()
+        });
+        alert("Thank you! We received your message.");
+      } catch (e) {
+        console.error("Error adding document: ", e);
+        alert("Something went wrong. Try again.");
+      }
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>TS Event Management</h1>
+    <p>Your One-Stop Solution for Memorable Events 🎉</p>
+  </header>
+
+  <div class="thumbnail">
+    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb" alt="TS Event Management Thumbnail" />
+  </div>
+
+  <section class="section bio">
+    <h2>About Us</h2>
+    <p>At TS Event Management, we bring your dreams to life. From small private gatherings to grand corporate functions, we handle everything with professionalism and creativity. Our team of experts ensures your event is memorable, stress-free, and perfectly executed.</p>
+  </section>
+
+  <section class="section programs">
+    <h2>Our Event Programs</h2>
+    <ul>
+      <li>Wedding Planning & Decoration 💍</li>
+      <li>Birthday Parties & Private Events 🎂</li>
+      <li>Corporate Events & Conferences 💼</li>
+      <li>Product Launches 🚀</li>
+      <li>Festivals & Cultural Events 🎭</li>
+      <li>Live Concerts & Music Shows 🎶</li>
+      <li>Fashion Shows 👗</li>
+      <li>School & College Functions 🎓</li>
+      <li>Exhibitions & Trade Fairs 🏢</li>
+      <li>Sports Events & Tournaments ⚽</li>
+      <li>Celebrity & Influencer Meetups 🌟</li>
+    </ul>
+  </section>
+
+  <section class="section contact">
+    <h2>Contact & Booking Form</h2>
+    <form onsubmit="event.preventDefault(); submitForm();">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <input type="text" id="phone" placeholder="Phone Number" required />
+      <select id="event" required>
+        <option value="">Select Event Type</option>
+        <option>Wedding</option>
+        <option>Birthday</option>
+        <option>Corporate</option>
+        <option>Concert</option>
+        <option>Festival</option>
+        <option>Fashion Show</option>
+        <option>Other</option>
+      </select>
+      <textarea id="message" rows="4" placeholder="Your Message"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 TS Event Management | All Rights Reserved</p>
+  </footer>
+</body>
+</html>
+
+<footer>
+  <p>Contact us: 9158516761 | Email: <a href="mailto:tanmay.pvtt18@gmail.com">tanmay.pvtt18@gmail.com</a></p>
+</footer>
